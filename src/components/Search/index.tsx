@@ -4,10 +4,10 @@ import request from "@/services";
 
 const Search: FC = () => {
     const searchRef = useRef<HTMLInputElement>(null);
-    const handleSearch = (e: any) => {
+    const handleSearch = async (e: any) => {
         // console.log(e);
         if (e.code === "Enter") {
-            const res = request.get(
+            const res = await request.get(
                 `https://fs-music-api.vercel.app/music/url/${searchRef.current?.value}`
             );
             console.log(res);

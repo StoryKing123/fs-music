@@ -5,10 +5,52 @@
     // justify-content: center;
     height: 100px;
     align-items: center;
-    background-color: rgb(213, 212, 212);
+    background-color: rgb(247, 246, 246);
     width: 100%;
+    &__progress-bar {
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        top: 0px;
+        cursor: pointer;
+        background-color: rgb(143, 143, 143);
+        &--current {
+            width: 50%;
+            background-color: red;
+            position: absolute;
+            top: 0px;
+            height: 2px;
+            :hover {
+            }
+        }
+        &__circle {
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            position: absolute;
+            top: -3px;
+            right: 0px;
+            border-radius: 50%;
+            // visibility: hidden;
+            // hover {
+            // visibility: visible;
+            // }
+        }
+    }
     &__song-info {
         margin-left: auto;
+        &__cover {
+            height: 80%;
+            border-radius: 6 px;
+        }
+        &__name {
+        }
+        &__author {
+            color: rgb(107, 107, 107);
+        }
+        &__progress {
+            color: grey;
+        }
     }
     &__media-control {
         margin: auto;
