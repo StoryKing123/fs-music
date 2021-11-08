@@ -6,8 +6,10 @@ export interface IMusic {
         coverUrl: string;
         length: number;
         currentLength: number;
+        author: string;
     };
 }
+
 export interface IStoreState {
     music: IMusic;
 }
