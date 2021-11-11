@@ -1,16 +1,21 @@
 import React, { useRef } from "react";
 import { FC } from "react";
 import request from "@/services";
+import { useStoreActions, useStoreState } from "@/Store";
 
 const Search: FC = () => {
     const searchRef = useRef<HTMLInputElement>(null);
+    const musicRef = document.getElementById("music");
+    const { setMusic } = useStoreActions();
+    const { music } = useStoreState();
+ 
     const handleSearch = async (e: any) => {
         // console.log(e);
         if (e.code === "Enter") {
-            const res = await request.get(
-                `https://fs-music-api.vercel.app/music/url/${searchRef.current?.value}`
+            const res: any = await request.get(
+                `http://fs-netease-cloud-music-api.vercel.app/search?keywords=/${searchRef.current?.value}&type=1&limit=10`
             );
-            console.log(res);
+            setMusic({ ...music, searchResult: res.result });
         }
     };
     return (

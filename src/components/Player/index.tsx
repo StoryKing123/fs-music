@@ -2,7 +2,9 @@ import React from "react";
 import { FC } from "react";
 import style from "./index.module.less";
 import MediaControl from "../MediaControl";
+import { useStoreState } from "@/Store";
 const Player: FC = () => {
+    const { music } = useStoreState();
     return (
         <div className={style["player"]}>
             <div className={style["player__progress-bar"]}>
@@ -12,23 +14,31 @@ const Player: FC = () => {
                     ></div>
                 </div>
             </div>
-            <div className={style["player__song-info"]}></div>
-            <img
-                className={style["player__song-info__cover"]}
-                src="http://p2.music.126.net/sVTf399sAAY8hrbI5ZlOUQ==/109951165161505639.jpg?param=130y130"
-                alt=""
-            />
-            <div>
-                <div className={style["player__song-info__name"]}>
-                    Take You Dancing
-                    <span className={style["player__song-info__author"]}>
-                        jason derulo
-                    </span>
+            {music.currentSong ? (
+                <div className={style["player__song-info"]}>
+                    <img
+                        className={style["player__song-info__cover"]}
+                        src={music.currentSong.album.artist.img1v1Url}
+                        alt=""
+                    />
+                    <div>
+                        <div className={style["player__song-info__name"]}>
+                            {music.currentSong.name}
+                            <span
+                                className={style["player__song-info__author"]}
+                            >
+                                {music.currentSong.artists[0].name}
+                            </span>
+                        </div>
+                        <div className={style["player__song-info__progress"]}>
+                            00:00/04:55
+                        </div>
+                    </div>
                 </div>
-                <div className={style["player__song-info__progress"]}>
-                    00:00/04:55
-                </div>
-            </div>
+            ) : (
+                ""
+            )}
+
             <div className={style["player__media-control"]}>
                 <MediaControl></MediaControl>
             </div>
