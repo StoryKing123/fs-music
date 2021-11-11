@@ -17,11 +17,19 @@ const StoreContext = createContext<{
     state: initialState,
 });
 
-type Action = { type: "switchPlay"; payload: IStoreState };
+type Action =
+    | { type: "SWITCH_PLAY"; payload: IStoreState }
+    | { type: "SET_MUSIC"; payload: IStoreState };
 const reducer = (state: IStoreState, action: Action) => {
     switch (action.type) {
-        case "switchPlay":
+        case "SWITCH_PLAY":
             return action.payload;
+        case "SET_MUSIC":
+            console.log(state);
+            console.log(action);
+            console.log("======");
+            return { ...state, music: action.payload as any };
+        // return { ...state, music: action.payload };
         default:
             return state;
     }
@@ -32,7 +40,7 @@ const Store: FC = ({ children }) => {
 
     return (
         <StoreContext.Provider value={{ state, dispatch }}>
-            { children }
+            {children}
         </StoreContext.Provider>
     );
 };
@@ -56,13 +64,24 @@ export const useStoreActions = () => {
     const switchPlayStatus = useCallback(
         (status: boolean) => {
             dispatch({
-                type: "switchPlay",
+                type: "SWITCH_PLAY",
                 payload: { music: { isPlayingMusic: status } },
             });
         },
         [dispatch]
     );
-    return { switchPlayStatus };
+
+    const setMusic = useCallback(
+        (payload) => {
+            dispatch({
+                type: "SET_MUSIC",
+                payload: payload,
+            });
+        },
+        [dispatch]
+    );
+
+    return { switchPlayStatus, setMusic };
 };
 
 export default Store;
