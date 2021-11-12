@@ -2,6 +2,8 @@ import React, { FC } from "react";
 import { useStoreState, useStoreActions } from "@/Store";
 import { ISong } from "@/data";
 import request from "@/services";
+import { parseTimestampIntoMinute } from "@/utils";
+
 export const Search: FC = () => {
     const { music } = useStoreState();
     const { setMusic } = useStoreActions();
@@ -22,8 +24,17 @@ export const Search: FC = () => {
             总共{music.searchResult?.songCount}条结果 =====
             {music.searchResult?.songs.map((song) => {
                 return (
-                    <div key={song.id} onClick={() => handlePlayMusic(song)}>
-                        {song.name}
+                    <div
+                        className="flex items-center"
+                        key={song.id}
+                        onClick={() => handlePlayMusic(song)}
+                    >
+                        <div className="w-1/4">{song.name}</div>
+                        <div className="w-1/4">{song.artists[0].name}</div>
+                        <div className="w-1/4">{song.album.name}</div>
+                        <div className="w-1/4">
+                            {parseTimestampIntoMinute(song.duration)}
+                        </div>
                     </div>
                 );
             })}

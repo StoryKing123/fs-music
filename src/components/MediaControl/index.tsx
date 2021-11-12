@@ -6,11 +6,12 @@ const MediaControl: FC = () => {
     const musicDom: HTMLVideoElement = document.getElementById(
         "music"
     ) as HTMLVideoElement;
-    // musicDom.src =
-    // "http://gn.sycdn.kuwo.cn/e3cc202cc6a16267ad70a1376fc54494/61878f01/resource/n1/67/21/1256704021.mp3";
+
     const state = useStoreState();
     const { switchPlayStatus } = useStoreActions();
     const handlePlayMusic = () => {
+        console.log(musicDom.duration);
+        console.log(musicDom.currentTime)
         switchPlayStatus(!state.music.isPlayingMusic);
         if (state.music.isPlayingMusic) {
             musicDom.play();

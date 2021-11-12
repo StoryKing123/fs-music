@@ -12,14 +12,15 @@ function App() {
 
     return (
         <div>
-            <TopNav></TopNav>
             <Router>
+                <TopNav></TopNav>
+
                 <Routes>
                     <Route path="/" element={<Index />}></Route>
                     <Route path="/search" element={<Search />}></Route>
                 </Routes>
+                <Player></Player>
             </Router>
-            <Player></Player>
         </div>
     );
 }
