@@ -1,0 +1,24 @@
+.play-list-item {
+    &__play {
+        width: 100px;
+        &::before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            width: 100px;
+            height: 100%;
+            top: 0px;
+            left: 0px;
+            filter: blur(10px);
+            overflow: hidden;
+            background-color: aqua;
+        }
+        // filter: blur(10px);
+    }
+    // &__play::before {
+    //     filter: blur(10px);
+    // }
+}
+.play {
+    width: 100px;
+}

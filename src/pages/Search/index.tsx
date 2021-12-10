@@ -1,14 +1,16 @@
-import React, { FC } from "react";
-import { useStoreState, useStoreActions } from "@/Store";
+import React, { FC, useContext } from "react";
+import { useStoreState, useStoreActions, StoreContext } from "@/store/index";
 import { ISong } from "@/data";
 import request from "@/services";
 import { parseTimestampIntoMinute } from "@/utils";
+import { List } from "@douyinfe/semi-ui";
+import { Spin } from "@douyinfe/semi-ui";
 
 export const Search: FC = () => {
-    const { music } = useStoreState();
-    const { setMusic } = useStoreActions();
+    const { music, loading } = useStoreState();
+    // const state = useStoreState();
+    const { setMusic, setLoading } = useStoreActions();
     const musicDom = document.getElementById("music") as HTMLVideoElement;
-    console.log(music);
     const handlePlayMusic = async (song: ISong) => {
         const res = await request.get(
             `https://fs-music-api.vercel.app/music/url/${song.id}`
@@ -16,10 +18,13 @@ export const Search: FC = () => {
         setMusic({ ...music, currentSong: { ...song, url: res.data.url } });
         musicDom.src = res.data.url;
         musicDom.play();
-        console.log(res);
     };
+    const { state } = useContext(StoreContext);
+
     return (
-        <div>
+        <div className="">
+            {/* {state.loading?.isLoading ? "未家在" : "已加载"} */}
+            {state.loading?.isLoading ? <Spin size="large"></Spin> : "加载完成"}
             search result; 　<br />
             总共{music.searchResult?.songCount}条结果 =====
             {music.searchResult?.songs.map((song) => {

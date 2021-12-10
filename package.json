@@ -10,6 +10,7 @@
         "electron": "electron ."
     },
     "dependencies": {
+        "@douyinfe/semi-ui": "^2.1.1",
         "axios": "^0.24.0",
         "lodash": "^4.17.21",
         "long": "^5.1.0",

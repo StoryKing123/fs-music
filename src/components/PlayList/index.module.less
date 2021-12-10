@@ -1,0 +1,36 @@
+.play-list {
+    max-height: 500px;
+    height: 500px;
+    // background-color: aqua;
+    bottom: 100px;
+    // transition: all 1s;
+    animation: myfirst 1s;
+    -webkit-animation: myfirst 1s; /* Safari and Chrome */
+    background: yellow;
+    width: 20%;
+
+    @keyframes myfirst {
+        from {
+            background: red;
+            height: 0px;
+        }
+        to {
+            height: 500px;
+            background: yellow;
+        }
+    }
+
+    // @-webkit-keyframes myfirst /* Safari and Chrome */ {
+    //     from {
+    //         background: red;
+    //     }
+    //     to {
+    //         background: yellow;
+    //     }
+    // }
+    // :hover {
+    //     max-height: 700px;
+    //     height:700px;
+
+    // }
+}

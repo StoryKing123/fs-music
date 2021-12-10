@@ -72,7 +72,11 @@ export interface ISongList {
     userId: number;
     updateTime: number;
     description: string;
-    tracks: [];
+    tracks: {
+        name: string;
+        id: number;
+        ar: { id: number; name: string }[];
+    }[];
 }
 export interface ITrack {
     name: string;
@@ -87,8 +91,25 @@ export interface ITrack {
 }
 
 export interface IStoreState {
-    music: IMusic;
-    loading?: {
-        isLoading: true;
+    isPlayingMusic: boolean;
+    list?: {
+        id: number;
+        name: string;
+        coverUrl: string;
+        songs: ISong[];
     };
+    searchResult?: ISearchResult;
+    currentSong?: ICurrentSong;
+}
+
+export interface IMusicStoreData {
+    isPlayingMusic: boolean;
+    list?: {
+        id: number;
+        name: string;
+        coverUrl: string;
+        songs: ISong[];
+    };
+    searchResult?: ISearchResult;
+    currentSong?: ICurrentSong;
 }

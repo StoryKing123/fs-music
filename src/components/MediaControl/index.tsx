@@ -1,6 +1,6 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import style from "./index.module.less";
-import { useStoreActions, useStoreState } from "../../Store";
+import { useStoreActions, useStoreState } from "../../store/index";
 
 const MediaControl: FC = () => {
     const musicDom: HTMLVideoElement = document.getElementById(
@@ -8,24 +8,29 @@ const MediaControl: FC = () => {
     ) as HTMLVideoElement;
 
     const state = useStoreState();
-    const { switchPlayStatus } = useStoreActions();
+    const { switchPlayStatus, setMusic } = useStoreActions();
     const handlePlayMusic = () => {
-        console.log(musicDom.duration);
-        console.log(musicDom.currentTime)
-        switchPlayStatus(!state.music.isPlayingMusic);
+        // console.log(musicDom.duration);
+        // console.log(musicDom.currentTime);
+        // switchPlayStatus(!state.music.isPlayingMusic);
+        setMusic({
+            ...state.music,
+            isPlayingMusic: !state.music.isPlayingMusic,
+        });
         if (state.music.isPlayingMusic) {
             musicDom.play();
         } else {
             musicDom.pause();
         }
+        console.log(state);
+
         // console.log(state.music.isPlayingMusic);
     };
 
     return (
-        <>
+        <div className="flex">
             <div>
                 <svg
-                    t="1636265841827"
                     className="icon"
                     viewBox="0 0 1024 1024"
                     version="1.1"
@@ -45,7 +50,6 @@ const MediaControl: FC = () => {
             <div>
                 {state.music.isPlayingMusic ? (
                     <svg
-                        t="1636265720886"
                         className="icon"
                         onClick={handlePlayMusic}
                         viewBox="0 0 1024 1024"
@@ -65,7 +69,6 @@ const MediaControl: FC = () => {
                     </svg>
                 ) : (
                     <svg
-                        t="1636272577231"
                         className="icon"
                         viewBox="0 0 1024 1024"
                         version="1.1"
@@ -88,7 +91,6 @@ const MediaControl: FC = () => {
             </div>
             <div>
                 <svg
-                    t="1636265927212"
                     className="icon"
                     viewBox="0 0 1024 1024"
                     version="1.1"
@@ -104,7 +106,7 @@ const MediaControl: FC = () => {
                     ></path>
                 </svg>
             </div>
-        </>
+        </div>
     );
 };
 
